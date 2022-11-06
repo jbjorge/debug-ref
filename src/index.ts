@@ -1,5 +1,5 @@
 import { DevtoolsPluginApi, ExtractSettingsTypes, PluginSettingsItem, setupDevtoolsPlugin } from '@vue/devtools-api';
-import { getCurrentScope, onScopeDispose, Ref, watch, watchEffect } from 'vue';
+import { getCurrentScope, onScopeDispose, Ref, watch } from 'vue';
 
 let _api: DevtoolsPluginApi<ExtractSettingsTypes<Record<string, PluginSettingsItem>>>;
 let readId = 'read-ref-layer-id';
@@ -31,6 +31,9 @@ export default {
 };
 
 export function debugRef(name: string, ref: Ref) {
+	if (!_api) {
+		return;
+	}
 	let oldValueString: any;
 	const unwatch = watch(
 		() => ref.value,
