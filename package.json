@@ -4,6 +4,12 @@
   "description": "Debug the value of vuejs refs in the dev tools",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
+  "keywords": ["vue", "debug", "ref"],
+  "repository": {
+    "url": "https://github.com/jbjorge/debug-ref/",
+    "type": "git"
+  },
+  "homepage": "https://github.com/jbjorge/debug-ref/",
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "deploy": "npm publish --access public",
