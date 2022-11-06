@@ -1,7 +1,7 @@
 {
-  "name": "@diffx/tracked-ref",
-  "version": "0.0.2",
-  "description": "Track the value of vuejs refs in the dev tools",
+  "name": "@diffx/debug-ref",
+  "version": "0.0.1",
+  "description": "Debug the value of vuejs refs in the dev tools",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "scripts": {
