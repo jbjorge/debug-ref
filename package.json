@@ -6,7 +6,8 @@
   "module": "lib/esm/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "prepublish": "npm run build"
+    "deploy": "npm publish --access public",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "lib/"
@@ -17,7 +18,7 @@
     "@vue/devtools-api": "^6.4.5"
   },
   "peerDependencies": {
-    "vue": "^3.2.41"
+    "vue": "^3.2"
   },
   "devDependencies": {
     "typescript": "^4.8.4",
