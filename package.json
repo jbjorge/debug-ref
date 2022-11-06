@@ -1,6 +1,6 @@
 {
   "name": "@diffx/debug-ref",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Debug the value of vuejs refs in the dev tools",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
