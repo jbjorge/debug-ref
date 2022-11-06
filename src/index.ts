@@ -4,6 +4,7 @@ import { getCurrentScope, onScopeDispose, Ref, watch } from 'vue';
 let _api: DevtoolsPluginApi<ExtractSettingsTypes<Record<string, PluginSettingsItem>>>;
 let readId = 'read-ref-layer-id';
 let writeId = 'write-ref-layer-id';
+let refBuffer: { [key: string]: Ref<any> } = {};
 
 export default {
 	install(app: any, options: {}) {
@@ -26,12 +27,17 @@ export default {
 				label: 'Ref modified',
 				color: 0x41b86a
 			});
+			Object.keys(refBuffer).forEach(key => {
+				debugRef(key, refBuffer[key]);
+			})
+			refBuffer = {};
 		});
 	}
 };
 
 export function debugRef(name: string, ref: Ref) {
 	if (!_api) {
+		refBuffer[name] = ref;
 		return;
 	}
 	let oldValueString: any;
