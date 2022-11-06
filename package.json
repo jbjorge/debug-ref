@@ -1,0 +1,26 @@
+{
+  "name": "@diffx/tracked-ref",
+  "version": "0.0.1",
+  "description": "Track the value of vuejs refs in the dev tools",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "lib/"
+  ],
+  "author": "Joachim Bjørge <jb@ground.no> (http://ground.no/)",
+  "license": "MIT",
+  "dependencies": {
+    "@vue/devtools-api": "^6.4.5"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4",
+    "vue": "^3.2.41"
+  }
+}
