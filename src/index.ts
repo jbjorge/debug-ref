@@ -40,11 +40,11 @@ export function debugRef(name: string, ref: Ref) {
 		refBuffer[name] = ref;
 		return;
 	}
-	let oldValueString: any;
+	let oldValueString: any = null;
 	const unwatch = watch(
 		() => ref.value,
 		(newValue) => {
-			const newValueString = JSON.stringify(newValue);
+			const newValueString = newValue == null ? null : JSON.stringify(newValue);
 			if (newValueString === oldValueString) {
 				return;
 			}
@@ -55,8 +55,8 @@ export function debugRef(name: string, ref: Ref) {
 					event: {
 						time: _api.now(),
 						data: {
-							newValue: JSON.parse(newValueString),
-							oldValue: JSON.parse(oldValueString),
+							newValue: newValueString == null ? null : JSON.parse(newValueString),
+							oldValue: oldValueString == null ? null : JSON.parse(oldValueString),
 							file: stackInfo.file,
 							line: `${stackInfo.line}:${stackInfo.col}`,
 							path: stackInfo.path
@@ -67,25 +67,22 @@ export function debugRef(name: string, ref: Ref) {
 					}
 				});
 			}
-			oldValueString = JSON.stringify(newValue);
+			oldValueString = newValueString;
 		},
 		{
-			onTrack: (a) => {
+			onTrack: () => {
 				const stackInfo = getStackInfo(new Error());
-				if (_api) {
-					_api.addTimelineEvent({
-						layerId: readId,
-						event: {
-							time: _api.now(),
-							data: stackInfo,
-							groupId: name,
-							title: name,
-							subtitle: 'in ' + stackInfo.file
-						}
-					});
-				}
+				_api.addTimelineEvent({
+					layerId: readId,
+					event: {
+						time: _api.now(),
+						data: stackInfo,
+						groupId: name,
+						title: name,
+						subtitle: 'in ' + stackInfo.file
+					}
+				});
 			},
-			onTrigger: e => console.log(e),
 			deep: true,
 			flush: 'sync',
 			immediate: true
